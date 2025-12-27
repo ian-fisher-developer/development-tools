@@ -1,0 +1,9 @@
+
+# Mull settings, used in the mull-runner step, narrowing results to the
+# relevant implementation code. Without this filter, the mutation testing
+# results have incorrect entries from shared code.
+#
+# Specify the implementation paths directly related to the build target.
+
+includePaths:
+  - .*/src/.*

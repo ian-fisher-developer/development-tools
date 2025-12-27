@@ -1,0 +1,25 @@
+# Mull settings for the build step.
+#
+# This is a special Mull configuration, hardcoded in create_mutation_testing_report.sh
+# for the CMake build.
+
+
+# Exclude test code from mutation testing at the build step.
+#
+# Note that Mull can apply filters at both the build step and the later
+# mull-runner step. At the build step, exclude ONLY items of no interest,
+# leaving the mull-runner step to apply more specific filters.
+
+excludePaths:
+  - .*/tst/.*
+  - .*/submodules/.*
+
+
+# Specify the types of mutants that Mull should apply during the build.
+#
+# "cxx_default" is a conservative group of mutators. Consider adding more
+# aggressive items from the list at this link:
+#     https://mull.readthedocs.io/en/latest/SupportedMutations.html
+
+mutators:
+  - cxx_all

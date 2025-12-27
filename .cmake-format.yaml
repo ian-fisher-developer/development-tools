@@ -1,0 +1,15 @@
+# Wrap lines at 100 chars
+line_width: 100
+
+# Tabs are 4 spaces
+tab_size: 4
+
+# Put closing parenthesis alone on following line if the statement wraps
+dangle_parens: true
+
+# Allow comments to start with a bullet point or enumeration and not get wrapped
+bullet_char: "*"
+enum_char: "."
+
+# Try to parse comments as markup before formatting them
+enable_markup: true

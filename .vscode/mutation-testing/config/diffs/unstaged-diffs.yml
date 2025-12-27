@@ -1,0 +1,11 @@
+# Mull settings, used in the mull-runner step, for fast analysis during
+# development iterations.
+#
+# The gitDiffRef setting restricts analysis to the lines of changed code
+# in the unstaged work-in-progress.
+#
+# A clean build takes a while. Subsequent incremental builds and reduced
+# analysis are fast enough for frequent use during development iterations.
+
+gitDiffRef: .
+gitProjectRoot: ../.. # relative to the working directory set in create_mutation_testing_report.sh

@@ -1,0 +1,12 @@
+# Mull settings, used in the mull-runner step, for focused analysis around
+# branch changes.
+#
+# The gitDiffRef setting restricts analysis to the lines of changed code
+# in the current branch compared to the develop branch
+#
+# Use this configuration to check commits before pushing to master, or
+# to check the branch before starting a merge request. It may be useful
+# in a CI/CD pipeline.
+
+gitDiffRef: origin/master
+gitProjectRoot: ../.. # relative to the working directory set in create_mutation_testing_report.sh

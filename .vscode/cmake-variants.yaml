@@ -1,0 +1,28 @@
+statisticsConfigurationVariants:
+  default: all-debug
+  choices:
+    all-debug:
+      short: All Debug
+      long: "Configure all targets with debug build type (includes code coverage)"
+      env: {
+        ARCH: x86,
+        CMAKE_VARIANT_NAME: "all-debug" # helps settings.json define a unique build directory
+      }
+      settings: {
+        STATISTICS_BUILD_TESTS: "ON",
+        STATISTICS_GENERATE_COVERAGE_REPORT: "ON",
+        STATISTICS_BUILD_EXAMPLES: "ON"
+      }
+      buildType: Debug
+    release:
+      short: Release
+      long: "Configure targets with release build type"
+      env: {
+        ARCH: x86,
+        CMAKE_VARIANT_NAME: "release" # helps settings.json define a unique build directory
+      }
+      settings: {
+        STATISTICS_BUILD_TESTS: "ON",
+        STATISTICS_BUILD_EXAMPLES: "ON"
+      }
+      buildType: Release

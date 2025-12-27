@@ -1,0 +1,16 @@
+#pragma once
+
+#include <string>
+
+namespace stats
+{
+
+class StatisticsCalculator;
+
+/**
+ * Returns a text description of the statistics, in a form suitable for
+ * brief annotation.
+ */
+std::string description(const stats::StatisticsCalculator& calculator);
+
+} // namespace stats

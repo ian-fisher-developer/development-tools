@@ -1,0 +1,24 @@
+{
+  "name": "STATS",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "statistics-developer",
+  "workspaceFolder": "${env:PWD}",
+  "shutdownAction": "stopCompose",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "bierner.markdown-mermaid",
+        "cheshirekow.cmake-format",
+        "eamodio.gitlens",
+        "llvm-vs-code-extensions.vscode-clangd",
+        "matepek.vscode-catch2-test-adapter",
+        "ms-azuretools.vscode-containers",
+        "ms-vscode.cmake-tools",
+        "ms-vscode.cpptools",
+        "ms-vscode.hexeditor",
+        "ms-vscode.live-server",
+        "ryanluker.vscode-coverage-gutters"
+      ]
+    }
+  }
+}

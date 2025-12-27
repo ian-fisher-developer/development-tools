@@ -1,0 +1,8 @@
+# Mull settings, used in the mull-runner step, for a full mutation analysis.
+#
+# The analysis applies to all source code executed during the test run.
+#
+# Depending on the project this may take a while, and may produce an
+# initially overwhelming number of cases.
+
+# Deliberately empty config -- no gitDiffRef filtering

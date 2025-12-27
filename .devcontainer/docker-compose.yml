@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+    statistics-developer:
+        build:
+            context: .
+            dockerfile: statistics-developer.Dockerfile
+            args:
+                USER_NAME: ${USER}
+        image: statistics-developer
+        stdin_open: true
+        tty: true
+        volumes:
+            - ${HOME}/.ssh:${HOME}/.ssh
+            - ${HOME}/Development:${HOME}/Development
+            - /opt/dey:/opt/dey
+            - /opt/fsl-auto:/opt/fsl-auto
+        network_mode: host

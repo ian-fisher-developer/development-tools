@@ -1,0 +1,97 @@
+{
+    // The CMake extensions default to hiding the status bar controls.
+    // The status bar controls are highly convenient, so show them...
+    "cmake.options.statusBarVisibility": "compact",
+    // ... while hiding some other pieces to save space.
+    "cmake.options.advanced": {
+        "cpack": {
+            "statusBarVisibility": "hidden"
+        },
+        "ctest": {
+            "statusBarVisibility": "hidden"
+        },
+        "workflow": {
+            "statusBarVisibility": "hidden"
+        }
+    },
+    "gitlens.statusBar.enabled": false,
+    //
+    //
+    // Define a unique build directory for the build kit and build variant.
+    // We can then use the status bar selectors provided by the CMake
+    // extensions. Choose a build kit, choose a build variant. Each combination
+    // gets its own build directory. During development iterations use the
+    // status bar selectors to quickly switch between build configurations.
+    // Note the environment variable CMAKE_VARIANT_NAME is set in
+    // cmake-variants.yaml.
+    "cmake.buildDirectory": "${workspaceFolder}/build/build-vscode/${buildKitVendor}_${buildKitVersionMajor}_${buildKitVersionMinor}-${buildKitTargetArch}-${buildKitTargetOs}/${env:CMAKE_VARIANT_NAME}",
+    //
+    //
+    // We do not use CTest so disable it in the test explorer. Instead, tell
+    // the TestMate extension where to look for the built test programs...
+    "cmake.ctest.testExplorerIntegrationEnabled": false,
+    "testMate.cpp.test.executables": "build/build-vscode/**/*test*",
+    // ...and raise the test timeout to allow the stress tests.
+    "testMate.cpp.test.runtimeLimit": 36000,
+    //
+    //
+    // Tell the Coverage Gutters extension where to look for the coverage
+    // reports.
+    "coverage-gutters.coverageBaseDir": "build/build-vscode/**",
+    "coverage-gutters.coverageFileNames": [
+        "coverage_report.xml"
+    ],
+    "coverage-gutters.coverageReportFileName": "coverage_report.html",
+    //
+    //
+    // Turn on the inline linter suggestions.
+    "cmake.copyCompileCommands": "${workspaceFolder}/build/compile_commands.json",
+    "clangd.arguments": [
+        "--clang-tidy",
+        "--compile-commands-dir=${workspaceFolder}/build/"
+    ],
+    //
+    //
+    // Auto-save files after a few seconds...
+    "files.autoSave": "afterDelay",
+    // ...but do NOT keep reconfiguring while editing a CMakeLists.txt file--I
+    //    am happy to manually reconfigure after editing CMake files.
+    "cmake.configureOnEdit": false,
+    //
+    //
+    // When I press CTRL-S, apply the project code formatting so I never have
+    // to do that manually. Note, the formatting does NOT happen on autoSave.
+    "editor.formatOnSave": true,
+    //
+    //
+    // When I press CTRL-S, trim whitespace from each line, and save the file
+    // with one, and only one, newline at the end of each file. Note, the
+    // formatting does NOT happen on autoSave.
+    "files.trimTrailingWhitespace": true,
+    "files.trimFinalNewlines": true,
+    "files.insertFinalNewline": true,
+    //
+    //
+    // Build with ninja...
+    "cmake.generator": "Ninja",
+    // ...but keep the commented-out "make" options here because I can never
+    //    remember the syntax when I want to try "make".
+    // "cmake.generator": "Unix Makefiles",
+    // "cmake.parallelJobs": 8,
+    //
+    //
+    // A high population, single row tab bar, with a small scroll control at
+    // the right is a terrible UI. Just wrap the tabs. Multiple rows of tabs
+    // is a sign I need to clean up.
+    "workbench.editor.wrapTabs": true,
+    //
+    //
+    // Personally, I think the minimap takes up space without adding much value.
+    "editor.minimap.enabled": false,
+    //
+    //
+    // Do NOT show the build directory in the file explorer.
+    "files.exclude": {
+        "build": true
+    }
+}

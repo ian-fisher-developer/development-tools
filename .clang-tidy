@@ -1,0 +1,187 @@
+Checks: >
+    bugprone-*,
+    clang-analyzer-*,
+    hicpp-*,
+    misc-*,
+    modernize-*,
+    performance-*,
+    readability-*,
+    -hicpp-explicit-conversions,
+    -hicpp-use-auto,
+    -hicpp-no-array-decay,
+    -hicpp-named-parameter,
+    -hicpp-move-const-arg,
+    -hicpp-avoid-c-arrays,
+    -modernize-use-auto,
+    -modernize-pass-by-value,
+    -modernize-return-braced-init-list,
+    -modernize-use-trailing-return-type,
+    -modernize-make-unique,
+    -readability-isolate-declaration,
+    -readability-magic-numbers,
+    -readability-redundant-access-specifiers,
+    -readability-redundant-declaration,
+    -readability-redundant-string-init,
+    -readability-uppercase-literal-suffix,
+    -bugprone-easily-swappable-parameters,
+
+# We don't want to force 'auto' in all places
+#-hicpp-use-auto,
+#-modernize-use-auto,
+
+# This is a duplicate of performance-move-const-arg
+#-hicpp-move-const-arg
+
+# This is a duplicate of modernize-avoid-c-arrays
+#-hicpp-avoid-c-arrays
+
+# This is really ugly and we don't do things that strictly require it
+#-modernize-use-trailing-return-type,
+
+# There's a lot of cases that could be 'technically' better if we move, but we
+# really don't need to worry about it
+#-modernize-pass-by-value
+
+# Explicit constructors are usually more readable
+#-modernize-return braced-init-list
+
+# make_unique isn't available in C++11
+#-modernize-make-unique
+
+# We prefer this off stylistically
+#-readability-isolate-declaration,
+
+# This prevents any and all magic numbers, which is frustrating if you want to
+# do a simple `(a+b)/2` or similar
+#-readability-magic-numbers,
+
+# We don't mind the extra verbosity that these allow
+#-readability-redundant-access-specifiers,
+#-readability-redundant-string-init,
+
+AnalyzeTemporaryDtors: true
+CheckOptions:
+    # This prevents clang-tidy from flagging data structs
+    - key:             misc-non-private-member-variables-in-classes.IgnoreClassesWithAllMemberVariablesBeingPublic
+      value:           '1'
+
+    # This allows us to define pure interface classes with a virtual destructor and no other special member functions
+    - key:             hicpp-special-member-functions.AllowSoleDefaultDtor
+      value:           true
+
+    # This allows us to use std::move to pass around trivially copyable types. This allows us to standardize internally
+    # on moving events around, even if they're trivial
+    - key:             performance-move-const-arg.CheckTriviallyCopyableMove
+      value:           0
+
+    # This allows us to pass shared pointers to functions by value to increment reference counts even when readonly.
+    - key:             performance-unnecessary-value-param.AllowedTypes
+      value:           shared_ptr
+
+    # Disable such warnings for mixed C/C++ code
+    - key:             hicpp-deprecated-headers
+      value:           false
+    - key:             modernize-deprecated-headers
+      value:           false
+
+    #
+    - key:             readability-identifier-length.IgnoredVariableNames
+      value:           '^_l$'
+
+    # Coding style rules
+
+    # Types of variables
+    - key:      readability-identifier-naming.VariableCase
+      value:    'lower_case'
+    - key:      readability-identifier-naming.MemberCase
+      value:    'lower_case'
+    - key:      readability-identifier-naming.ValueTemplateParameterCase
+      value:    'lower_case'
+    - key:      readability-identifier-naming.GlobalConstantCase
+      value:    'CamelCase'
+    - key:      readability-identifier-naming.ConstexprVariableCase
+      value:    'CamelCase'
+    - key:      readability-identifier-naming.EnumConstantCase
+      value:    'CamelCase'
+    - key:      readability-identifier-naming.ScopedEnumConstantCase
+      value:    'CamelCase'
+    - key:      readability-identifier-naming.StaticConstantCase
+      value:    'CamelCase'
+    - key:      readability-identifier-naming.LocalConstantCase
+      value:    'lower_case'
+    - key:      readability-identifier-naming.ConstantCase
+      value:    'lower_case'
+    - key:      readability-identifier-naming.ConstantMemberCase
+      value:    'lower_case'
+
+    # Types and Type-like things
+    - key:      readability-identifier-naming.TypeAliasCase
+      value:    'CamelCase'
+    - key:      readability-identifier-naming.TypedefCase
+      value:    'CamelCase'
+    - key:      readability-identifier-naming.ClassCase
+      value:    'CamelCase'
+    - key:      readability-identifier-naming.StructCase
+      value:    'CamelCase'
+    - key:      readability-identifier-naming.EnumCase
+      value:    'CamelCase'
+
+    # Prefixes
+    - key:      readability-identifier-naming.GlobalConstantPrefix
+      value:    'k'
+    - key:      readability-identifier-naming.ConstexprVariablePrefix
+      value:    'k'
+    - key:      readability-identifier-naming.EnumConstantPrefix
+      value:    'k'
+    - key:      readability-identifier-naming.ScopedEnumConstantPrefix
+      value:    'k'
+    - key:      readability-identifier-naming.StaticConstantPrefix
+      value:    'k'
+    - key:      readability-identifier-naming.LocalConstantPrefix
+      value:    ''
+    - key:      readability-identifier-naming.ConstantPrefix
+      value:    ''
+    - key:      readability-identifier-naming.ConstantMemberPrefix
+      value:    ''
+
+    # Suffixes
+    - key:      readability-identifier-naming.TypeAliasSuffix
+      value:    ''
+    - key:      readability-identifier-naming.TypedefSuffix
+      value:    ''
+    - key:      readability-identifier-naming.ClassSuffix
+      value:    ''
+    - key:      readability-identifier-naming.StructSuffix
+      value:    ''
+    - key:      readability-identifier-naming.ConstantMemberSuffix
+      value:    ''
+    - key:      readability-identifier-naming.PrivateMemberSuffix
+      value:    '_'
+    - key:      readability-identifier-naming.ProtectedMemberSuffix
+      value:    '_'
+
+    # Functions
+    - key:      readability-identifier-naming.MethodCase
+      value:    'lower_case'
+    - key:      readability-identifier-naming.FunctionCase
+      value:    'lower_case'
+
+    # Other
+    - key:      readability-identifier-naming.NamespaceCase
+      value:    "lower_case"
+    - key:      readability-identifier-naming.MacroDefinitionCase
+      value:    "UPPER_CASE"
+
+    # Template types need to end in T or just be a single capital constant
+    - key:      readability-identifier-naming.TypeTemplateParameterSuffix
+      value:    "T"
+    - key:      readability-identifier-naming.TemplateTemplateParameterSuffix
+      value:    "T"
+    - key:      readability-identifier-naming.TypeTemplateParameterIgnoredRegexp
+      value:    "^[A-Z]$"
+    - key:      readability-identifier-naming.TemplateTemplateIgnoredRegexp
+      value:    "^[A-Z]$"
+
+    # Macros complexity (log4cplus macros)
+    - key:      readability-function-cognitive-complexity.IgnoreMacros
+      value:    true
