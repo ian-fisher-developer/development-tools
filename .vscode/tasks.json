@@ -6,9 +6,9 @@
             "detail": "Run valgrind on the statistics unit-test program with an optional fixture filter",
             "group": "build",
             "type": "shell",
-            "command": "valgrind --leak-check=full --show-leak-kinds=all --log-file=statistics_test_valgrind.txt ./statistics_test --gtest_filter=${input:test_fixture}.* ; echo '\nReport is at ${command:cmake.buildDirectory}/tst/statistics_test_valgrind.txt\n'",
+            "command": "valgrind --leak-check=full --show-leak-kinds=all --log-file=statistics_test_valgrind.txt ./statistics_test --gtest_filter=${input:test_fixture}.* ; echo '\nReport is at ${command:cmake.buildDirectory}/bin/statistics_test_valgrind.txt\n'",
             "options": {
-                "cwd": "${command:cmake.buildDirectory}/tst"
+                "cwd": "${command:cmake.buildDirectory}/bin"
             }
         },
         {

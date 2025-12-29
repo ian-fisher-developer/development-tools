@@ -127,7 +127,7 @@ check_mull_config_file_exists "$mull_runner_target_config"
 #  - note if any build artifacts already exist--useful summary info
 #  - export the Mull build configuration as MULL_CONFIG for mull-ir-frontend
 
-test_program_dir="$build_dir"/tst
+test_program_dir="$build_dir"/bin
 test_program="$test_program_dir"/"$build_target"
 
 build_scope="Fresh configure and Clang build"
