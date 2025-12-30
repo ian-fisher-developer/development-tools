@@ -27,14 +27,14 @@ void StatisticsAccumulator::add(const float& value)
     minimum_ = std::min(value, minimum_);
     maximum_ = std::max(value, maximum_);
 
-    const double dval     = static_cast<double>(value);
+    const double dVal     = static_cast<double>(value);
     const double nvals    = static_cast<double>(count_);
-    const double delta    = dval - moment1_;
+    const double delta    = dVal - moment1_;
     const double delta_n  = delta / nvals;
     const double delta_n2 = delta_n * delta_n;
     const double term1    = delta * delta_n * (nvals - 1);
     moment1_ += delta_n;
-    abs_moment1_ += (fabs(dval) - abs_moment1_) / nvals;
+    abs_moment1_ += (fabs(dVal) - abs_moment1_) / nvals;
     moment4_ += term1 * delta_n2 * (nvals * nvals - 3 * nvals + 3) + 6.0 * delta_n2 * moment2_ -
                 4.0 * delta_n * moment3_;
     moment3_ += term1 * delta_n * (nvals - 2) - 3.0 * delta_n * moment2_;
