@@ -6,16 +6,20 @@ quality-oriented tools.
 
 ## Motivation
 
-VSCode users know that the application is highly expandable and flexible.
-They also know that discovering all the tools and techniques to configure
-VSCode is not easy. This repository presents a highly enriched VSCode
-environment for C++ development on Linux.
+VSCode users know that the application is highly expandable and flexible. They
+also know that discovering all the tools and techniques to configure VSCode is
+not easy. This repository presents a highly enriched VSCode environment for
+quality-oriented C++ development on Linux.
 
-The repository has a C++ statistics accumulator class and tests. The
-statistics code is not really important. It serves to showcase the many
-additions required to turn VSCode in to a quality-oriented C++ development
-tool. Those many additions are the point of this repository. It might be
-used as a template for new projects.
+There is a C++ statistics accumulator class and tests. The statistics code
+serves to showcase the many additions required to turn VSCode in to a rich C++
+IDE. Those many additions are the point of this repository. It might be used as
+a template for new VSCode C++ projects.
+
+Developers using other IDEs, or even the command-line, might be interested
+in cherry-picking pieces from this project. For example, the custom build
+tasks for mutation testing and code sanitizers are powered by scripts easily
+transferred to other C++ development environments.
 
 
 ## Overview
@@ -127,10 +131,13 @@ environment's C++ development features.
   A custom build task runs the unit-test program under valgrind and logs the
   results to a [valgrind report][4].
 
-- Create more reports
+- Use the compiler's code sanitizers
 
-  The environment has more custom build tasks generating reports from valgrind,
-  and the compiler's address sanitizer and undefined-behavior sanitizer.
+  Two custom build tasks generate reports from the compiler's
+  [address sanitizer][5] and [undefined-behavior sanitizer][6].
+  Each task builds the project's code with the corresponding sanitizer flag,
+  then runs the unit-test program. The instrumented code writes to a log file
+  if it finds any issues.
 
 
 [1]: https://ian-fisher-developer.github.io/development-tools/statistics_coverage_report/coverage_report.html
@@ -141,3 +148,7 @@ environment's C++ development features.
      "Full mutation testing report for the project unit-test program"
 [4]: https://ian-fisher-developer.github.io/development-tools/statistics_test_valgrind.txt
      "Valgrind report for the project unit-test program"
+[5]: https://gcc.gnu.org/onlinedocs/gcc/Instrumentation-Options.html#index-fsanitize_003daddress
+     "GCC address sanitizer description"
+[6]: https://gcc.gnu.org/onlinedocs/gcc/Instrumentation-Options.html#index-fsanitize_003dundefined
+     "GCC undefined-behavior sanitizer description"
