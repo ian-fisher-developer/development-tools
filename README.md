@@ -133,7 +133,7 @@ environment's C++ development features.
   and the compiler's address sanitizer and undefined-behavior sanitizer.
 
 
-[1]: https://github.com/ian-fisher-developer/development-tools/blob/main/doc/statistics_coverage_report/coverage_report.html
+[1]: doc/statistics_coverage_report/coverage_report.html
      "HTML code coverage report for the project unit-test program"
 [2]: https://en.wikipedia.org/wiki/Mutation_testing
      "Wikipedia description of mutation testing"
