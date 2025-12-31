@@ -68,7 +68,8 @@ in the container. Or, click on `Open a Remote Window` (at the very left of the
 status bar) and choose `Reopen in Container`. Note that, for the first time
 only, it may take quite a while for VSCode to create the docker images.
 
-When the DevContainer session is ready, try the following steps.
+When the DevContainer session is ready, follow these steps to exercise the
+environment's C++ development features.
 
 - Configure the build
 
@@ -79,8 +80,8 @@ When the DevContainer session is ready, try the following steps.
 - Build all and use the test explorer
 
   Choose the `all` build target (in the status bar selector) and build it to
-  create the library, the test program, and the example programs. Open the test
-  explorer side pane to view and run the unit tests.
+  create the library, the unit-test program, and the example programs.
+  Open the test explorer side pane to view and run the unit tests.
 
   The test explorer has controls to run all the tests or a single test. Or, set
   `Start Continuous Run` (at the top of the test explorer) to automatically run
@@ -121,15 +122,22 @@ When the DevContainer session is ready, try the following steps.
   Select `Run Build Task` from VSCode's `Terminal` menu to create either a
   [full mutation testing report][3], or an analysis for only the branch diffs.
 
+- Look for memory leaks
+
+  A custom build task runs the unit-test program under valgrind and logs the
+  results to a [valgrind report][4].
+
 - Create more reports
 
   The environment has more custom build tasks generating reports from valgrind,
   and the compiler's address sanitizer and undefined-behavior sanitizer.
 
 
-[1]: doc/statistics_coverage_report/coverage_report.html
-     "HTML code coverage repport for the project unit-test program"
+[1]: https://github.com/ian-fisher-developer/development-tools/blob/main/doc/statistics_coverage_report/coverage_report.html
+     "HTML code coverage report for the project unit-test program"
 [2]: https://en.wikipedia.org/wiki/Mutation_testing
      "Wikipedia description of mutation testing"
 [3]: doc/statistics_test_no-diff-filter.txt
      "Full mutation testing report for the project unit-test program"
+[4]: doc/statistics_test_valgrind.txt
+     "Valgrind report for the project unit-test program"
