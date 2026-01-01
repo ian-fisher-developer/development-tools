@@ -41,7 +41,7 @@
     "coverage-gutters.coverageFileNames": [
         "coverage_report.xml"
     ],
-    "coverage-gutters.coverageReportFileName": "coverage_report.html",
+    "coverage-gutters.coverageReportFileName": "build/build-vscode-cmake-tools/**/coverage_report.html",
     //
     //
     // Turn on the inline linter suggestions.

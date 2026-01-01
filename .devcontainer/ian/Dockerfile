@@ -24,8 +24,7 @@ RUN apt-get update && apt-get install -y \
 # Install the mutation testing engine.
 
 RUN curl -1sLf 'https://dl.cloudsmith.io/public/mull-project/mull-stable/setup.deb.sh' | bash
-RUN apt-get update \
-    && DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install -y \
+RUN apt-get update && apt-get install -y \
     mull-14 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*

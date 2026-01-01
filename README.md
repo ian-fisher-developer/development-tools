@@ -1,4 +1,4 @@
-# VSCode C++ Development Environment
+# VSCode C++ Development Tools
 
 A VSCode C++ development environment for Linux, richly populated with
 quality-oriented tools.
@@ -11,15 +11,17 @@ also know that discovering all the tools and techniques to configure VSCode is
 not easy. This repository presents a highly enriched VSCode environment for
 quality-oriented C++ development on Linux.
 
-There is a C++ statistics accumulator class and tests. The statistics code
-serves to showcase the many additions required to turn VSCode in to a rich C++
-IDE. Those many additions are the point of this repository. It might be used as
+A C++ statistics accumulator class helps to showcase the environment's
+features. The class is similar to Boost's statistics accumulator, without the
+Boost dependency. The code is not the point of this repository. It serves to
+demonstrate the many additions required to turn VSCode in to a rich C++ IDE.
+Those many additions are the point of this repository. It might be used as
 a template for new VSCode C++ projects.
 
 Developers using other IDEs, or even the command-line, might be interested
-in cherry-picking pieces from this project. For example, the custom build
-tasks for mutation testing and code sanitizers are powered by scripts easily
-transferred to other C++ development environments.
+in pieces from this project. For example, the custom build tasks for mutation
+testing and code sanitizers are powered by scripts easily transferred to other
+C++ development environments.
 
 
 ## Overview
@@ -28,7 +30,7 @@ The developmment enviroonment is provided via two directories:
 
 - .devcontainer
 
-  A VSCode containerized x86 development installlation based on Ubuntu.
+  A VSCode containerized development installlation based on Ubuntu.
   The developer works in the environment under their own account.
 
 - .vscode
@@ -60,9 +62,9 @@ docker installed. They also assume you have a GitHub account with a registered
 SSH key so you can clone this repository and open it in VSCode.
 
 ```
-git clone git@github.com:ian-fisher-developer/development-tools.git
+git clone git@github.com:ian-fisher-developer/vscode-cpp-dev-tools.git
 
-cd development-tools
+cd vscode-cpp-dev-tools
 
 code .
 ```
@@ -104,7 +106,10 @@ environment's C++ development features.
   for this violation of the project's code naming conventions.
 
   The clangd extension from the LLVM project provides a full C++ code model,
-  enabling many code editing helpers such as auto-complete options.
+  enabling many code editing helpers such as code completion options. Note
+  that VSCode tends to install GitHub CoPilot by default. The LLM's slop
+  gets in the way. Turn off GitHub CoPilot to return to accurate information
+  from the code model.
 
   Ctrl-S auto-formats C++ and CMake files according to the project standards.
 
@@ -140,13 +145,13 @@ environment's C++ development features.
   if it finds any issues.
 
 
-[1]: https://ian-fisher-developer.github.io/development-tools/statistics_coverage_report/coverage_report.html
+[1]: https://ian-fisher-developer.github.io/vscode-cpp-dev-tools/statistics_coverage_report/coverage_report.html
      "HTML code coverage report for the project unit-test program"
 [2]: https://en.wikipedia.org/wiki/Mutation_testing
      "Wikipedia description of mutation testing"
-[3]: https://ian-fisher-developer.github.io/development-tools/statistics_test_no-diff-filter.txt
+[3]: https://ian-fisher-developer.github.io/vscode-cpp-dev-tools/statistics_test_no-diff-filter.txt
      "Full mutation testing report for the project unit-test program"
-[4]: https://ian-fisher-developer.github.io/development-tools/statistics_test_valgrind.txt
+[4]: https://ian-fisher-developer.github.io/vscode-cpp-dev-tools/statistics_test_valgrind.txt
      "Valgrind report for the project unit-test program"
 [5]: https://gcc.gnu.org/onlinedocs/gcc/Instrumentation-Options.html#index-fsanitize_003daddress
      "GCC address sanitizer description"
