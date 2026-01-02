@@ -107,7 +107,7 @@ environment's C++ development features.
 
   The clangd extension from the LLVM project provides a full C++ code model,
   enabling many code editing helpers such as code completion options. Note
-  that VSCode tends to install GitHub CoPilot by default. The LLM's slop
+  that VSCode tends to install GitHub CoPilot by default. The AI's slop
   suggestions get in the way. Turn off GitHub CoPilot to return to accurate
   information from the code model.
 
