@@ -7,10 +7,10 @@
     }
   },
   "mounts": [
-    "source=${env:PWD},target=${env:PWD},type=bind",
+    "source=${localWorkspaceFolder},target=${localWorkspaceFolder},type=bind",
     "source=${env:HOME}/.ssh,target=${env:HOME}/.ssh,type=bind"
   ],
-  "workspaceFolder": "${env:PWD}",
+  "workspaceFolder": "${localWorkspaceFolder}",
   "customizations": {
     "vscode": {
       "extensions": [

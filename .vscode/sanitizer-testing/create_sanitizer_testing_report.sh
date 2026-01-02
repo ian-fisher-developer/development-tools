@@ -95,7 +95,7 @@ fi
 
 sanitizer_build_dir="$build_dir"/sanitizer-$sanitizer_name
 sanitizer_reports_dir="$build_dir"/reports
-sanitizer_report="$sanitizer_reports_dir"/"$build_target"_$sanitizer_name
+sanitizer_report="$sanitizer_reports_dir"/"$build_target"_'$sanitizer_name'.txt
 
 test_program_dir="$sanitizer_build_dir"/bin
 test_program="$test_program_dir"/"$build_target"

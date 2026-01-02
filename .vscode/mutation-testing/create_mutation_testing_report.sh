@@ -198,7 +198,7 @@ echo ""
 
 reports_dir="$build_dir"/reports
 mkdir -p "$reports_dir"
-report="$reports_dir"/"$build_target"_"$diffs".txt
+report="$reports_dir"/"$build_target"_mull_"$diffs".txt
 
 mull_runner_config="$reports_dir"/"$build_target"_"$diffs".yml
 cat "$mull_runner_diff_config" "$mull_runner_target_config" > "$mull_runner_config"
