@@ -3,7 +3,7 @@
     "tasks": [
         {
             "label": "Valgrind report",
-            "detail": "Generate a valgrind report for the statistics unit-test program",
+            "detail": "Generate a valgrind report for the unit-test program",
             "group": "build",
             "type": "shell",
             "command": "valgrind --leak-check=full --show-leak-kinds=all --log-file=statistics_test_valgrind.txt ./statistics_test ; echo '\nReport is at ${command:cmake.buildDirectory}/bin/statistics_test_valgrind.txt\n'",
@@ -12,32 +12,42 @@
             }
         },
         {
-            "label": "Undefined-behavior sanitizer report",
-            "detail": "Generate an undefined-behavior sanitizer report for the statistics unit-test program",
+            "label": "Sanitizer testing report",
+            "detail": "Generate a sanitizer testing report for the unit-test program",
             "group": "build",
             "type": "shell",
-            "command": "${workspaceFolder}/.vscode/sanitizer-testing/create_sanitizer_testing_report.sh -s undefined statistics_test",
+            "command": "${workspaceFolder}/.vscode/sanitizer-testing/create_sanitizer_testing_report.sh -s ${input:sanitizer_type} statistics_test",
         },
         {
-            "label": "Address sanitizer report",
-            "detail": "Generate an address sanitizer report for the statistics unit-test program",
+            "label": "Mutation testing report",
+            "detail": "Generate a mutation testing report for the unit-test program",
             "group": "build",
             "type": "shell",
-            "command": "${workspaceFolder}/.vscode/sanitizer-testing/create_sanitizer_testing_report.sh -s address statistics_test",
+            "command": "${workspaceFolder}/.vscode/mutation-testing/create_mutation_testing_report.sh -d ${input:mutation_diff_filter} statistics_test",
+        }
+    ],
+    "inputs": [
+        {
+            "id": "mutation_diff_filter",
+            "description": "A diff filter that narrows mutation testing to current changes",
+            "default": "branch-diffs",
+            "type": "pickString",
+            "options": [
+                "branch-diffs",
+                "unstaged-diffs",
+                "staged-and-unstaged-diffs",
+                "no-diff-filter"
+            ]
         },
         {
-            "label": "Full mutation testing report",
-            "detail": "Generate a full mutation testing report for the statistics unit-test program",
-            "group": "build",
-            "type": "shell",
-            "command": "${workspaceFolder}/.vscode/mutation-testing/create_mutation_testing_report.sh statistics_test",
-        },
-        {
-            "label": "Branch diffs mutation testing report",
-            "detail": "Generate a mutation testing report reduced to only the branch diffs",
-            "group": "build",
-            "type": "shell",
-            "command": "${workspaceFolder}/.vscode/mutation-testing/create_mutation_testing_report.sh -d branch-diffs statistics_test",
+            "id": "sanitizer_type",
+            "description": "The sanitizer type, either address sanitizer or undefined-bahavior sanitizer",
+            "default": "address",
+            "type": "pickString",
+            "options": [
+                "address",
+                "undefined"
+            ]
         }
     ]
 }

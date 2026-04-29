@@ -47,7 +47,8 @@ function(add_generate_coverage_report_target target)
         COMMAND
             ${GCovr_EXECUTABLE} --root ${CMAKE_SOURCE_DIR} ${ARGN} --branches
             --exclude-throw-branches --exclude-unreachable-branches --print-summary --xml-pretty
-            --xml ${target}_coverage_report/coverage_report.xml --html-details
+            --xml ${target}_coverage_report/coverage_report.xml --html-title
+            "${target} coverage report" --html-details
             ${target}_coverage_report/coverage_report.html --gcov-executable "${GCov_COMMAND}"
             ${CMAKE_BINARY_DIR}
         BYPRODUCTS ${target}_coverage_report/coverage_report.xml

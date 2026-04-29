@@ -14,6 +14,7 @@
             "statusBarVisibility": "hidden"
         }
     },
+    "gitlens.launchpad.indicator.enabled": false,
     "gitlens.statusBar.enabled": false,
     //
     //
@@ -41,10 +42,12 @@
     "coverage-gutters.coverageFileNames": [
         "coverage_report.xml"
     ],
+    "livePreview.useIntegratedBrowser": false,
     "coverage-gutters.coverageReportFileName": "build/build-vscode-cmake-tools/**/coverage_report.html",
     //
     //
     // Turn on the inline linter suggestions.
+    "C_Cpp.intelliSenseEngine": "disabled",
     "cmake.copyCompileCommands": "${workspaceFolder}/build/compile_commands.json",
     "clangd.arguments": [
         "--clang-tidy",
