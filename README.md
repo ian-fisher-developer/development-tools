@@ -62,13 +62,13 @@ environment:
 When the DevContainer session is ready, follow these steps to exercise the
 environment's C++ development features.
 
-- Configure the build
+- **Configure the build**
 
   The CMake Tools extension has a build-kit selector in the VSCode status bar.
   Choose GCC 11.4.0. The extension runs the CMake configure step to the
   build/build-vscode-cmake-tools directory.
 
-- Build all and use the test explorer
+- **Build all and use the test explorer**
 
   Choose the `all` build target (in the status bar selector).
   Be careful of a trap...the status bar may have both `default build target`
@@ -85,7 +85,7 @@ environment's C++ development features.
   in the screen-shot above, the test explorer is moved to VSCode's secondary
   side bar, on the right.
 
-- Try the code editor
+- **Try the code editor**
 
   Open src/lib/StatisticsAccumulator.cpp from the file explorer.
 
@@ -105,7 +105,7 @@ environment's C++ development features.
 
   Ctrl-S auto-formats C++ and CMake files according to the project standards.
 
-- Examine code coverage
+- **Examine code coverage**
 
   Switch from `all` to the `statistics_coverage_report` target and build it.
 
@@ -116,7 +116,7 @@ environment's C++ development features.
   to add coverage annotation to the C++ code editor in the form of colored bars
   by the line numbers.
 
-- Test the tests
+- **Test the tests**
 
   A custom build task provides [mutation testing][2] for the project, helping
   find gaps in the tests, even when code coverage is all green.
@@ -124,14 +124,14 @@ environment's C++ development features.
   Select `Run Build Task` from VSCode's `Terminal` menu to create a
   [full mutation testing report][3] by applying no diff filter.
 
-- Look for memory leaks
+- **Look for memory leaks**
 
   A custom build task runs the unit-test program under valgrind and logs the
   results to a [valgrind report][4].
 
   Select `Run Build Task` from VSCode's `Terminal` menu to execute the task.
 
-- Use the code sanitizers
+- **Use the code sanitizers**
 
   A custom build task creates a sanitizer testing report using the compiler's
   sanitize flag. It has options for the address sanitizer and the
