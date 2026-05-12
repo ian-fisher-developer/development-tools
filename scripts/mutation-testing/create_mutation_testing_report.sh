@@ -23,7 +23,7 @@ build_dir="$top_dir"/build/build-mutation-testing-reports
 description () {
   echo ""
   echo "Description:"
-  echo "  Create a local mutation testing report for a unit test program."
+  echo "  Create a mutation testing report for a unit-test program."
   echo "  The build configuration specifies the required flags for mutation testing."
   echo "  It avoids interfering with the developer's current configurations by"
   echo "  using its own build directory:"
@@ -37,11 +37,14 @@ workers=`nproc`
 usage () {
   echo ""
   echo "Usage:"
-  echo "  $(basename $0) [-h] [-d DIFFS] [-t TIMEOUT] [-w WORKERS] build_target"
+  echo "  $(basename $0) [-h] [-d DIFFS] [-t TIMEOUT] [-w WORKERS] test_target"
   echo "  Options:"
   echo "    -h          Print the description, usage, and examples."
   echo "    -d DIFFS    Reduce analysis to just the code changes. Specify one of:"
-  echo "                branch-diffs, unstaged-diffs, staged-and-unstaged-diffs."
+  echo "                  branch-diffs"
+  echo "                  unstaged-diffs"
+  echo "                  staged-and-unstaged-diffs"
+  echo "                  no-diff-filter"
   echo "                Default: $diffs"
   echo "    -t TIMEOUT  Mull time limit for each test, in milliseconds."
   echo "                Default: $timeout"
@@ -94,11 +97,11 @@ shift "$(($OPTIND -1))"
 
 if [ -z $1 ]; then
   echo ""
-  echo "Error in $(basename $0): no build target specified"
+  echo "Error in $(basename $0): no test target specified"
   usage
   exit 1
 else
-  build_target="$1"
+  test_target="$1"
 fi
 
 
@@ -106,7 +109,7 @@ fi
 
 mull_build_config="$mutation_testing_dir"/config/build.yml
 mull_runner_diff_config="$mutation_testing_dir"/config/diffs/"$diffs".yml
-mull_runner_target_config="$mutation_testing_dir"/config/targets/"$build_target".yml
+mull_runner_target_config="$mutation_testing_dir"/config/targets/"$test_target".yml
 
 function check_mull_config_file_exists {
   mull_config_file="$1"
@@ -128,7 +131,7 @@ check_mull_config_file_exists "$mull_runner_target_config"
 #  - export the Mull build configuration as MULL_CONFIG for mull-ir-frontend
 
 test_program_dir="$build_dir"/bin
-test_program="$test_program_dir"/"$build_target"
+test_program="$test_program_dir"/"$test_target"
 
 build_scope="Fresh configure and Clang build"
 [[ -d "$build_dir" ]] && build_scope="Clean Clang build"
@@ -149,14 +152,12 @@ mkdir -p "$build_dir"
 cd "$build_dir"
 
 
-# Configure the RIOT build for mutation testing and build the test target.
+# Configure the build for mutation testing.
 
 export ARCH="x86"
-
 llvm_version=14
 mull_instruments="-fexperimental-new-pass-manager -fpass-plugin=/usr/lib/mull-ir-frontend-$llvm_version \
                   -g -grecord-command-line -fprofile-instr-generate -O0 -fcoverage-mapping"
-
 cmake -S "$top_dir" -B "$build_dir" -G "Ninja" \
   -DSTATISTICS_BUILD_TESTS="ON" \
   -DCMAKE_BUILD_TYPE="Debug" \
@@ -164,7 +165,10 @@ cmake -S "$top_dir" -B "$build_dir" -G "Ninja" \
   -DCMAKE_CXX_FLAGS="$mull_instruments" \
   || exit 1
 
-cmake --build "$build_dir" --target "$build_target" \
+
+# Build the unit-test program.
+
+cmake --build "$build_dir" --target "$test_target" \
   || exit 1
 
 
@@ -175,7 +179,7 @@ cmake --build "$build_dir" --target "$build_target" \
 if [ ! -f "$test_program" ]
 then
   echo ""
-  echo Error in $(basename $0): could not find test program "$build_target" in build directory "$test_program_dir"
+  echo Error in $(basename $0): could not find test program "$test_target" in build directory "$test_program_dir"
   exit 1
 fi
 
@@ -198,9 +202,9 @@ echo ""
 
 reports_dir="$build_dir"/reports
 mkdir -p "$reports_dir"
-report="$reports_dir"/"$build_target"_mull_"$diffs".txt
+report="$reports_dir"/"$test_target"_mull_"$diffs".txt
 
-mull_runner_config="$reports_dir"/"$build_target"_"$diffs".yml
+mull_runner_config="$reports_dir"/"$test_target"_"$diffs".yml
 cat "$mull_runner_diff_config" "$mull_runner_target_config" > "$mull_runner_config"
 check_mull_config_file_exists "$mull_runner_config"
 
@@ -226,8 +230,8 @@ summary=( \
   "Top directory: $top_dir" \
   "Current branch and commit: $(git branch --show-current) $(git rev-parse HEAD)" \
   "Steps:" \
-  "  - $build_scope of target $build_target" \
-  "  - Mull $diffs mutation analysis of test program $build_target" \
+  "  - $build_scope of target $test_target" \
+  "  - Mull $diffs mutation analysis of test program $test_target" \
   "Total build and analysis time: $SECONDS seconds" \
   "==================== $(basename $0) run details ===================="
 )
@@ -238,7 +242,7 @@ done
 
 echo ""
 echo ==================== $(basename $0) run results ====================
-echo Mutation testing report ready for "$build_target":
+echo Mutation testing report ready for "$test_target":
 echo "  - $report"
 echo ==================== $(basename $0) run results ====================
 echo ""

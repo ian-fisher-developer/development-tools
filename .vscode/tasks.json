@@ -16,14 +16,14 @@
             "detail": "Generate a sanitizer testing report for the unit-test program",
             "group": "build",
             "type": "shell",
-            "command": "${workspaceFolder}/.vscode/sanitizer-testing/create_sanitizer_testing_report.sh -s ${input:sanitizer_type} statistics_test",
+            "command": "${workspaceFolder}/scripts/sanitizer-testing/create_sanitizer_testing_report.sh -s ${input:sanitizer_type} statistics_test",
         },
         {
             "label": "Mutation testing report",
             "detail": "Generate a mutation testing report for the unit-test program",
             "group": "build",
             "type": "shell",
-            "command": "${workspaceFolder}/.vscode/mutation-testing/create_mutation_testing_report.sh -d ${input:mutation_diff_filter} statistics_test",
+            "command": "${workspaceFolder}/scripts/mutation-testing/create_mutation_testing_report.sh -d ${input:mutation_diff_filter} statistics_test",
         }
     ],
     "inputs": [

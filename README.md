@@ -30,8 +30,8 @@ Try the environment by following the step-by-step instructions below.
 
 ## Use The Environment
 
-These instructions assume you are working on Linux with VSCode, git, docker.io
-and docker-compose installed. They also assume you have a GitHub account with a
+These instructions assume you are working on Linux with VSCode, git, and
+docker.io and installed. They also assume you have a GitHub account with a
 registered SSH key so you can clone this repository and open it in VSCode.
 
 ```

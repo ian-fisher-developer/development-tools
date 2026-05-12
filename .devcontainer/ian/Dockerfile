@@ -9,7 +9,7 @@ ARG TZ=America/Chicago
 
 RUN apt-get update && apt-get install -y \
     build-essential \
-    clang-format clang-tidy clang-tools \
+    clang-format clang-tidy clang-tools clangd \
     cmake cmake-format \
     curl \
     gcovr \
@@ -19,12 +19,6 @@ RUN apt-get update && apt-get install -y \
     valgrind \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
-
-
-# Install a modern version of the language server.
-
-RUN wget https://apt.llvm.org/llvm.sh && chmod +x llvm.sh \
-    && ./llvm.sh 22 && apt install clangd-22
 
 
 # Install the mutation testing engine.
